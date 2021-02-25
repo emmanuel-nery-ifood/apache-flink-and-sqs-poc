@@ -8,8 +8,7 @@ class MyListener : MessageListener {
         try {
             val msg = (message as TextMessage).text
             println("Received: $msg")
-        }
-        catch (exp: JMSException){
+        } catch (exp: JMSException) {
             exp.printStackTrace()
         }
     }

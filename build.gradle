@@ -6,7 +6,6 @@ buildscript {
 
 }
 
-
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.30'
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.4.30'
@@ -20,18 +19,15 @@ repositories {
     jcenter()
 }
 
-
 dependencies {
-    implementation 'org.apache.flink:flink-streaming-java_2.12:1.7.2'
-    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
-    implementation group: 'com.amazonaws', name: 'amazon-sqs-java-messaging-lib', version: '1.0.8'
-    implementation group: 'org.glassfish.main.javaee-api', name: 'javax.jms', version: '3.1.2.2'
+    implementation "org.apache.flink:flink-streaming-java_2.12:1.7.2"
+    implementation "org.slf4j:slf4j-simple:1.7.30"
+    implementation "com.amazonaws:amazon-sqs-java-messaging-lib:1.0.8"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
-    testImplementation group: 'org.apache.flink', name: 'flink-test-utils_2.12', version: '1.12.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
+
+    testImplementation "org.apache.flink:flink-test-utils_2.12:1.12.1"
 }
-
-
 
 compileKotlin {
     kotlinOptions.jvmTarget = '1.8'
