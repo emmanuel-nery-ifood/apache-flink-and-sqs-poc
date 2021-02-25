@@ -8,9 +8,9 @@ class DataStreamExample {
             val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment()
 
             val flintstones: DataStream<Person> = env.fromElements(
-                Person("Fred", 35),
-                Person("Wilma", 35),
-                Person("Pebbles", 2))
+                Person(1,"Fred", 35),
+                Person(2,"Wilma", 35),
+                Person(3,"Pebbles", 2))
 
             val adults: DataStream<Person> = flintstones.filter { it.age >= 18 }
 
