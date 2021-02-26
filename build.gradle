@@ -20,8 +20,9 @@ repositories {
 }
 
 dependencies {
+    implementation "ch.qos.logback:logback-classic:1.2.3"
+    implementation "net.logstash.logback:logstash-logback-encoder:6.6"
     implementation "org.apache.flink:flink-streaming-java_2.12:1.7.2"
-    implementation "org.slf4j:slf4j-simple:1.7.30"
     implementation "com.amazonaws:amazon-sqs-java-messaging-lib:1.0.8"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"

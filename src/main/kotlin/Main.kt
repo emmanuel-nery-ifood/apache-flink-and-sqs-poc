@@ -15,8 +15,7 @@ fun main() {
         )
     )
 
-    val personFiltered = stream
-        .map {
+    stream.map {
             Json.decodeFromString<Person>(it!!)
         }
         .windowAll(of(seconds(5)))
