@@ -7,6 +7,6 @@ class BrazeSink : SinkFunction<List<Person>>{
     }
 
     companion object {
-        private val logger = LoggerFactory.getLogger(BrazeWriter::class.java)
+        private val logger = LoggerFactory.getLogger(BrazeSink::class.java)
     }
 }
