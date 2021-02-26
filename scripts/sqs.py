@@ -17,9 +17,14 @@ queue = sqs.create_queue(
     }
 )
 
+sqs.purge_queue(
+    QueueUrl = queue['QueueUrl']
+)
+
+
 counter = 1
 
-types = ['Type1','Type2','Type2']
+types = ['Type1', 'Type2', 'Type3', 'Type4', 'Type5']
 
 while True:
     message = {

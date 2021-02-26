@@ -1,26 +1,27 @@
-import com.amazonaws.regions.Regions
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
-import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows.of
-import org.apache.flink.streaming.api.windowing.time.Time.seconds
 
 fun main() {
-    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment()
-    val stream = env.addSource(
-        FlinkSqsConsumer(
-            queueName = "digester",
-            endpointUrl = "http://localhost:4566",
-            region = Regions.US_EAST_2.toString()
-        )
-    )
+    val queueName = "digester"
+    val endpointUrl = "http://localhost:4566"
+    val region = "US_EAST_2"
+    val windowSize = 75L
 
-    stream.map {
-        Json.decodeFromString<Person>(it!!)
-    }
-        .windowAll(of(seconds(5)))
-        .process(ProcessPersonsWindow())
-        .writeUsingOutputFormat(BrazeWriter())
+    val env = StreamExecutionEnvironment.getExecutionEnvironment()
+        .apply {
+            addSource(
+                FlinkSqsConsumer(
+                    queueName, endpointUrl, region
+                )
+            ).map {
+                Json.decodeFromString<Person>(it!!)
+            }
+                .keyBy { it.type }
+                .countWindow(windowSize)
+                .process(ProcessPersonsWindow())
+                .writeUsingOutputFormat(BrazeWriter())
+        }
 
     env.execute()
 }

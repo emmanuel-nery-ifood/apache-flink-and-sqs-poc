@@ -1,9 +1,9 @@
-import org.apache.flink.streaming.api.functions.windowing.ProcessAllWindowFunction
-import org.apache.flink.streaming.api.windowing.windows.TimeWindow
+import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction
+import org.apache.flink.streaming.api.windowing.windows.GlobalWindow
 import org.apache.flink.util.Collector
 
-class ProcessPersonsWindow : ProcessAllWindowFunction<Person, Person, TimeWindow>() {
-    override fun process(context: Context, elements: MutableIterable<Person>, out: Collector<Person>) {
-        elements.forEach(out::collect)
+class ProcessPersonsWindow : ProcessWindowFunction<Person, List<Person>, Type, GlobalWindow>() {
+    override fun process(key: Type, context: Context, elements: MutableIterable<Person>, out: Collector<List<Person>>) {
+        out.collect(elements.toList())
     }
 }
