@@ -16,12 +16,11 @@ fun main() {
     )
 
     stream.map {
-            Json.decodeFromString<Person>(it!!)
-        }
+        Json.decodeFromString<Person>(it!!)
+    }
         .windowAll(of(seconds(5)))
         .process(ProcessPersonsWindow())
-        .print()
+        .writeUsingOutputFormat(BrazeWriter())
 
     env.execute()
 }
-
