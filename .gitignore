@@ -4,6 +4,12 @@
 
 # IntelliJ project files
 .idea
+build
+target
+!**/src/main/**
+!**/src/enabled/**
+.DS_Store
+.gradle
 *.iml
 out
 gen
