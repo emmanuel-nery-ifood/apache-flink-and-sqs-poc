@@ -8,7 +8,7 @@ class DatasetExample {
             val env = ExecutionEnvironment.getExecutionEnvironment()
 
             val message: DataSet<String> = env.fromElements("Mas", "que", "Xablau", "mano")
-            val blackList = listOf<String>("Xablau")
+            val blackList = listOf("Xablau")
 
             val messageFriendly = message.filter {
                 it !in blackList

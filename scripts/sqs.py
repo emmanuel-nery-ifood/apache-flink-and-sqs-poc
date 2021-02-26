@@ -29,7 +29,6 @@ while True:
         'type': random.choice(types)
     }
 
-
     message_json = json.dumps(message)
     sqs.send_message(
         QueueUrl = queue['QueueUrl'],
