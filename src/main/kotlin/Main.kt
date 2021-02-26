@@ -12,7 +12,9 @@ fun main() {
         .apply {
             addSource(
                 FlinkSqsConsumer(
-                    queueName, endpointUrl, region
+                    queueName,
+                    endpointUrl,
+                    region
                 )
             ).map {
                 Json.decodeFromString<Person>(it!!)
@@ -20,8 +22,10 @@ fun main() {
                 .keyBy { it.type }
                 .countWindow(windowSize)
                 .process(ProcessPersonsWindow())
-                .writeUsingOutputFormat(BrazeWriter())
+//                .writeUsingOutputFormat(BrazeWriter())
+                .addSink(BrazeSink())
         }
+
 
     env.execute()
 }
